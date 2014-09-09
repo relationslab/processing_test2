@@ -7,10 +7,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<script type="text/javascript" src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
 	<script type="text/processing" data-processing-target="mycanvas">
-final int POINTS = 16;
-final int THICKNESS = 24;
-final int R = 16;
-final int ALPHA_DEC = 8;
+final int POINTS = 32;
+final int THICKNESS = 32;
+final int R = 12;
+final int ALPHA_DEC = 5;
 final float THICKNESS_DEC = 1;
 float[] pxs = new float[POINTS];
 float[] pys = new float[POINTS];
@@ -37,9 +37,11 @@ void mouseDragged(){
 
 	float d = dist(mouseX, mouseY, x_bef, y_bef)/10;
 	for(int i=0; i<POINTS; i++){
-		fill(0, 0, 0, pas[i]);
+		pxs[i]+=random(0.1)-0.05;
+		pys[i]+=random(0.1)-0.05;
 		pas[i]-=random(ALPHA_DEC)*d;     if(pas[i]<0)  pas[i]=0;
 		prs[i]-=random(THICKNESS_DEC)*d; if(prs[i]<=0) prs[i]=0;
+		fill(0, 0, 0, pas[i]);
 		stroke(0, 0, 0, pas[i]);
 		strokeWeight(prs[i]);
 		line(mouseX+pxs[i], mouseY+pys[i], x_bef+pxs[i], y_bef+pys[i]);
