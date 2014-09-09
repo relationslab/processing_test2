@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<script type="text/javascript" src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
+	<script type="text/processing" data-processing-target="mycanvas">
+void setup(){
+  size( 640, 640 );
+  noStroke();
+  smooth();
+  background(255);
+  colorMode(HSB, 360, 100, 100);
+  frameRate(60);
+}
+
+int frameStart = 0;
+int x_start = 320;
+int y_start = 320;
+
+void draw(){
+  int frameNow = (frameCount-frameStart);
+  float rad = frameNow/30.0f*PI*4;
+  float r = frameNow * 2;
+  fill(frameNow*1%360, 100, 100);
+  ellipse(x_start+r*cos(rad), 
+    y_start+r*sin(rad),
+    30+random(30),
+    30+random(30)
+  );
+}
+
+void mouseClicked(){
+  x_start = mouseX;
+  y_start = mouseY;
+  frameStart = frameCount;
+}
+</script>
+<body>
+<canvas id="mycanvas"></canvas>
+</body>
+</html>
